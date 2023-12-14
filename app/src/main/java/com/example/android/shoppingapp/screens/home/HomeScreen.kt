@@ -6,15 +6,21 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -25,9 +31,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.android.shoppingapp.R
 import com.example.android.shoppingapp.data.ProductListCategory
@@ -54,71 +64,90 @@ fun HomeScreen(
             ProductListCategory.WomenClothing to "Women Clothing"
         )
     }
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(text = "Shopping App")
-                },
-                navigationIcon = {
-                    IconButton(onClick = {
-                        navActions.navigateToCart()
-                    }) {
-                        Image(
-                            painter = painterResource(id = R.drawable.baseline_shopping_cart_24),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .size(24.dp)
-                                .padding(4.dp),
-                            alignment = Alignment.TopEnd
-                        )
-                    }
-                },
-                backgroundColor = MaterialTheme.colorScheme.primary
-            )
-        },
-        content = { contentPadding ->
-            LazyColumn(
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Gray)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp)
+                .background(MaterialTheme.colorScheme.primary)
+                .padding(horizontal = 16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Products",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Medium,
+                color = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier
-                    .fillMaxSize()
-                    .background(MaterialTheme.colorScheme.background)
-                    .padding(contentPadding)
-            ) {
-                item {
-                    if (homeScreenState.isLoading) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .aspectRatio(1f),
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            CircularProgressIndicator()
-                        }
-                    }
-                    if (homeScreenState.products.isNotEmpty()) {
-                        ProductListCategories(
-                            homeScreenState = homeScreenState,
-                            categoriesMap = categoriesMap,
-                            onClick = { category ->
-                                homeViewModel.getProducts(productListCategory = category)
-                            })
-                    }
-                }
-                items(
-                    items = homeScreenState.products,
-                    key = { it.hashCode() }
-                ) { product ->
-                    ProductItem(
-                        modifier = Modifier
-                            .padding(start = 4.dp, end = 4.dp, top = 4.dp, bottom = 12.dp)
-                            .fillMaxWidth(),
-                        product = product,
-                        onProductClick = { navActions.navigateToProductDetail(product.id) },
-                    )
-                }
+                    .padding(end = 8.dp)
+                    .weight(1f)
+            )
+            IconButton(modifier = Modifier, onClick = {
+                navActions.navigateToCart()
+            }) {
+                Icon(Icons.Filled.ShoppingCart, "cart icon")
+            }
+            IconButton(modifier = Modifier, onClick = {
+
+            }) {
+                Icon(painter = painterResource(id = R.drawable.baseline_history_24), contentDescription ="purchase history" )
             }
         }
-    )
+        /*
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp)
+                .background(Color.Cyan)
+        ) {
+
+        }
+
+         */
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
+                .padding(12.dp)
+        ) {
+            item {
+                if (homeScreenState.isLoading) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .aspectRatio(1f),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        CircularProgressIndicator()
+                    }
+                }
+                if (homeScreenState.products.isNotEmpty()) {
+                    ProductListCategories(
+                        homeScreenState = homeScreenState,
+                        categoriesMap = categoriesMap,
+                        onClick = { category ->
+                            homeViewModel.getProducts(productListCategory = category)
+                        })
+                }
+            }
+            items(
+                items = homeScreenState.products,
+                key = { it.hashCode() }
+            ) { product ->
+                ProductItem(
+                    modifier = Modifier
+                        .padding(start = 4.dp, end = 4.dp, top = 4.dp, bottom = 12.dp)
+                        .fillMaxWidth(),
+                    product = product,
+                    onProductClick = { navActions.navigateToProductDetail(product.id) },
+                )
+            }
+        }
+    }
 
 }

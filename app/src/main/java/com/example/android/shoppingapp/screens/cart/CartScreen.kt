@@ -1,6 +1,7 @@
 package com.example.android.shoppingapp.screens.cart
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -36,7 +37,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.room.PrimaryKey
+import com.example.android.shoppingapp.data.models.ProductsItem
+import com.example.android.shoppingapp.data.models.Rating
+import com.example.android.shoppingapp.screens.home.ProductItem
 import com.example.android.shoppingapp.utils.NavActions
+import com.google.gson.annotations.SerializedName
 import kotlinx.coroutines.CoroutineScope
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -51,11 +57,6 @@ fun CartScreen(
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val addedToCartProducts =
         cartViewModel.cartScreenState.value.allProducts.filter { it.addedToCart }
-    val total = cartViewModel.cartScreenState.value.allProducts
-    var totalP = 0.0;
-    for (item in total) {
-        totalP += item.price
-    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -115,7 +116,6 @@ fun CartScreen(
                                     .animateItemPlacement(),
                                 product = product,
                                 removeFromCart = {
-                                    totalP -= it.price
                                     cartViewModel.updateProduct(it)
                                 }
                             )
@@ -124,7 +124,21 @@ fun CartScreen(
                     Spacer(modifier = Modifier.height(24.dp))
                     Button(
                         onClick = {
-                                  navActions.navigateToHome()
+                            for (item in addedToCartProducts) {
+                                Log.d("cart product list: ", item.title)
+                                val prod = ProductsItem(
+                                    item.category,
+                                    item.description,
+                                    item.id,
+                                    item.image,
+                                    item.price,
+                                    item.rating,
+                                    item.title,
+                                    false
+                                )
+                                cartViewModel.updateProduct(prod)
+                            }
+                            navActions.navigateToHome()
                         },
                         modifier = Modifier
                             .fillMaxWidth()
@@ -132,7 +146,7 @@ fun CartScreen(
                         shape = RoundedCornerShape(20)
                     ) {
                         Text(
-                            text = "Place Order ( $${String.format("%.2f", totalP)} )",
+                            text = "Place Order",
                             color = Color.White,
                             fontWeight = FontWeight.Medium
                         )
