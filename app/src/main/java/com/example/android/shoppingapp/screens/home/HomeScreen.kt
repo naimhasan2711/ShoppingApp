@@ -68,16 +68,16 @@ fun HomeScreen(
                 .fillMaxWidth()
                 .height(56.dp)
                 .background(MaterialTheme.colorScheme.primary)
-                .padding(horizontal = 16.dp),
+                .padding(horizontal = 4.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
                 text = "Products",
-                fontSize = 16.sp,
+                fontSize = 24.sp,
                 fontWeight = FontWeight.Medium,
                 color = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier
-                    .padding(end = 8.dp)
+                    .padding(end = 8.dp, start = 16.dp)
                     .weight(1f)
             )
             IconButton(modifier = Modifier, onClick = {
@@ -102,17 +102,6 @@ fun HomeScreen(
                 )
             }
         }
-        /*
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(56.dp)
-                .background(Color.Cyan)
-        ) {
-
-        }
-
-         */
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
