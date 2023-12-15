@@ -84,7 +84,10 @@ fun SearchScreen(
                 viewModel.searchProductList()
             },
             searchResult = uiState.searchResult,
-            isSearchResultEmpty = uiState.isSearchResultEmpty
+            isSearchResultEmpty = uiState.isSearchResultEmpty,
+            onProductClick = {
+                navActions.navigateToHome()
+            }
         )
     }
 
@@ -105,7 +108,8 @@ private fun SearchScreenContent(
     searchValue: String,
     onSearchValChanged: (String) -> Unit,
     searchResult: List<ProductsItem>,
-    isSearchResultEmpty: Boolean
+    isSearchResultEmpty: Boolean,
+    onProductClick: () -> Unit
 ) {
     Column(
         modifier = modifier
