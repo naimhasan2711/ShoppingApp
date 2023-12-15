@@ -1,22 +1,23 @@
 package com.example.android.shoppingapp.screens.cart
 
-import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -34,70 +35,62 @@ fun CartProductItem(
     removeFromCart: (ProductsItem) -> Unit
 ) {
     Card(
-        modifier = modifier,
-        elevation = 6.dp,
+        modifier = Modifier
+            .padding(vertical = 4.dp, horizontal = 4.dp)
+            .fillMaxWidth()
     ) {
-        Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
             AsyncImage(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(300.dp),
+                    .width(100.dp)
+                    .height(100.dp)
+                    .weight(.25f),
                 model = ImageRequest.Builder(LocalContext.current).data(product.image).build(),
-                contentDescription = "description",
+                contentDescription = "random",
                 contentScale = ContentScale.Crop,
             )
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = product.title,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium,
-                color = MaterialTheme.colorScheme.onSurface,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp)
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = "${product.price} $",
-                fontSize = 14.sp,
-                color = MaterialTheme.colorScheme.primary,
-                maxLines = 1,
-                fontWeight = FontWeight.Medium,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
-            )
-            Text(
-                text = product.description,
-                fontSize = 14.sp,
-                color = MaterialTheme.colorScheme.onSurface,
-                maxLines = 10,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
-            )
-            Row(
+
+            // Spacer
+            Spacer(modifier = Modifier.width(8.dp))
+            Column(
                 modifier = Modifier
-                    .padding(start = 8.dp, end = 8.dp, top = 8.dp, bottom = 8.dp)
+                    .fillMaxWidth()
+                    .weight(.6f)
+                    .padding(horizontal = 4.dp, vertical = 2.dp),
+                verticalArrangement = Arrangement.Center
             ) {
-                OutlinedButton(
-                    onClick = { removeFromCart(product.copy(addedToCart = false)) },
-                    modifier = Modifier
-                        .padding(end = 8.dp)
-                        .weight(1f),
-                    shape = RoundedCornerShape(10)
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.Clear,
-                        contentDescription =  " icon",
-                        modifier = Modifier.padding(end = 4.dp),
-                        tint = MaterialTheme.colorScheme.primary,
-                    )
-                    Text(
-                        text = "Remove From Cart",
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Medium
-                    )
-                }
+                Text(
+                    text = product.title,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = Color.Black,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp)
+                )
+                Spacer(modifier = Modifier.height(30.dp))
+
+                Text(
+                    text = "S ${product.price}",
+                    fontSize = 14.sp,
+                    color = MaterialTheme.colorScheme.primary,
+                    maxLines = 1,
+                    fontWeight = FontWeight.Medium,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
+                )
             }
+
+            IconButton(modifier = Modifier.weight(.15f), onClick = {
+                removeFromCart(product.copy(addedToCart = false))
+            }) {
+                Icon(Icons.Filled.Delete, "cart icon")
+            }
+
         }
     }
 }
