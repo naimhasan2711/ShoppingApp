@@ -20,8 +20,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.android.shoppingapp.screens.cart.CartScreen
 import com.example.android.shoppingapp.screens.details.DetailsScreen
-import com.example.android.shoppingapp.screens.history.HistoryScreen
 import com.example.android.shoppingapp.screens.home.HomeScreen
+import com.example.android.shoppingapp.screens.purchase_history.PurchaseHistoryScreen
 import com.example.android.shoppingapp.ui.theme.ShoppingAppTheme
 import com.example.android.shoppingapp.utils.NavActions
 import com.example.android.shoppingapp.utils.NavRoutes
@@ -96,8 +96,7 @@ private fun MainScreen(
             }
 
             composable(NavRoutes.PURCHASE_HISTORY) {
-                HistoryScreen(
-                    currentRoute = currentRoute,
+                PurchaseHistoryScreen(
                     navActions = navActions,
                     coroutineScope = coroutineScope
                 )

@@ -3,7 +3,10 @@ package com.example.android.shoppingapp.di
 import android.app.Application
 import androidx.room.Room
 import com.example.android.shoppingapp.data.local.MyShopDatabase
+import com.example.android.shoppingapp.data.local.OrderDao
+import com.example.android.shoppingapp.data.local.OrderDatabase
 import com.example.android.shoppingapp.data.remote.api.ShoppingApi
+import com.example.android.shoppingapp.data.repository.OrderRepository
 import com.example.android.shoppingapp.data.repository.ProductsRepository
 import com.example.android.shoppingapp.data.repository.ProductsRepositoryImpl
 import dagger.Module
@@ -43,10 +46,35 @@ class AppModule {
 
     @Provides
     @Singleton
+    fun provideOrderDatabase(application: Application): OrderDatabase {
+        return Room.databaseBuilder(
+            application.applicationContext,
+            OrderDatabase::class.java,
+            "my_orders"
+        )
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Provides
+    @Singleton
     fun provideProductsRepository(
         fakeStoreApi: ShoppingApi,
         db: MyShopDatabase,
     ): ProductsRepository {
         return ProductsRepositoryImpl(fakeStoreApi = fakeStoreApi, productDao = db.productDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideOrderRepository(
+        orderDao: OrderDao,
+    ): OrderRepository {
+        return OrderRepository(orderDao)
+    }
+
+    @Provides
+    fun provideOrderDAO(orderDatabase: OrderDatabase): OrderDao {
+        return orderDatabase.orderDAO()
     }
 }

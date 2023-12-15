@@ -4,8 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -81,7 +79,8 @@ fun DetailsScreen(
                 DetailItem(modifier = Modifier
                     .padding(start = 4.dp, end = 4.dp, top = 4.dp, bottom = 12.dp)
                     .fillMaxHeight(),
-                    product = product, onAddToCart = {
+                    product = product,
+                    onAddToCart = {
                         detailViewModel.updateProduct(product = product.copy(addedToCart = it))
                     })
             }

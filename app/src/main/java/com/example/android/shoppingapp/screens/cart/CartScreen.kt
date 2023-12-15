@@ -1,7 +1,6 @@
 package com.example.android.shoppingapp.screens.cart
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -37,12 +36,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.room.PrimaryKey
+import com.example.android.shoppingapp.OrderViewModel
+import com.example.android.shoppingapp.data.models.Order
 import com.example.android.shoppingapp.data.models.ProductsItem
-import com.example.android.shoppingapp.data.models.Rating
-import com.example.android.shoppingapp.screens.home.ProductItem
 import com.example.android.shoppingapp.utils.NavActions
-import com.google.gson.annotations.SerializedName
 import kotlinx.coroutines.CoroutineScope
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -52,7 +49,8 @@ fun CartScreen(
     currentRoute: String,
     navActions: NavActions,
     coroutineScope: CoroutineScope,
-    cartViewModel: CartViewModel = hiltViewModel()
+    cartViewModel: CartViewModel = hiltViewModel(),
+    orderViewModel: OrderViewModel = hiltViewModel()
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val addedToCartProducts =
@@ -124,8 +122,11 @@ fun CartScreen(
                     Spacer(modifier = Modifier.height(24.dp))
                     Button(
                         onClick = {
+                            val arrayList = ArrayList<String>()
+                            var price = 0.0
+                            var order: Order? = null;
                             for (item in addedToCartProducts) {
-                                Log.d("cart product list: ", item.title)
+                                val orderId = (1000000..9000000).random().toString()
                                 val prod = ProductsItem(
                                     item.category,
                                     item.description,
@@ -136,7 +137,14 @@ fun CartScreen(
                                     item.title,
                                     false
                                 )
+                                arrayList.add(item.title)
+                                price += item.price
+                                val time = System.currentTimeMillis()
+                                order = Order(orderId, arrayList, price, time)
                                 cartViewModel.updateProduct(prod)
+                            }
+                            order?.let {
+                                orderViewModel.addOrder(order)
                             }
                             navActions.navigateToHome()
                         },

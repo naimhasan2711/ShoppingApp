@@ -94,5 +94,6 @@ dependencies {
 
     // Timber Logging tool
     implementation 'com.jakewharton.timber:timber:5.0.1'
+    implementation "androidx.compose.runtime:runtime-livedata:1.5.4"
 
 }

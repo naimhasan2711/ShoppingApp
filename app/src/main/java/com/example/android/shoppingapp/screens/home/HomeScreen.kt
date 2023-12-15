@@ -1,8 +1,6 @@
 package com.example.android.shoppingapp.screens.home
 
 import android.annotation.SuppressLint
-import android.widget.Toast
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,14 +10,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Icon
-import androidx.compose.material.Scaffold
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.IconButton
@@ -35,7 +29,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -92,9 +85,12 @@ fun HomeScreen(
                 Icon(Icons.Filled.ShoppingCart, "cart icon")
             }
             IconButton(modifier = Modifier, onClick = {
-
+                navActions.navigateToPurchaseHistory()
             }) {
-                Icon(painter = painterResource(id = R.drawable.baseline_history_24), contentDescription ="purchase history" )
+                Icon(
+                    painter = painterResource(id = R.drawable.baseline_history_24),
+                    contentDescription = "purchase history"
+                )
             }
         }
         /*

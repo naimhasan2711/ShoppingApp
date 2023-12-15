@@ -32,7 +32,7 @@ fun ProductItem(
 ) {
     Card(
         modifier = Modifier
-            .padding(vertical = 4.dp, horizontal = 16.dp)
+            .padding(vertical = 4.dp, horizontal = 4.dp)
             .fillMaxWidth()
             .clickable {
                 onProductClick()
