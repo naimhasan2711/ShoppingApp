@@ -8,6 +8,7 @@ object NavRoutes {
     const val PRODUCT_DETAIL = "Product_Detail?productId="
     const val CART = "Cart"
     const val PURCHASE_HISTORY = "Purchase_History"
+    const val SEARCH = "Search"
 
 }
 
@@ -30,5 +31,8 @@ class NavActions(private val navHostController: NavHostController) {
 
     val navigateToPurchaseHistory: () -> Unit = {
         navController.navigate(NavRoutes.PURCHASE_HISTORY)
+    }
+    val navigateToSearch: () -> Unit = {
+        navController.navigate(NavRoutes.SEARCH)
     }
 }

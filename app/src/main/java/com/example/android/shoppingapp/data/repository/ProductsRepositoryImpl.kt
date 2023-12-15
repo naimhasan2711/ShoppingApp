@@ -4,6 +4,7 @@ import com.example.android.shoppingapp.data.ProductListCategory
 import com.example.android.shoppingapp.data.local.ProductDao
 import com.example.android.shoppingapp.data.models.ProductsItem
 import com.example.android.shoppingapp.data.remote.api.ShoppingApi
+import com.example.android.shoppingapp.screens.search.dbCall
 import com.example.android.shoppingapp.utils.getProductsByCategory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -52,6 +53,10 @@ class ProductsRepositoryImpl @Inject constructor(
                 }
             }
         }
+    }
+
+    override suspend fun getAllProducts():com.example.android.shoppingapp.screens.search.Response<List<ProductsItem>>  {
+        return dbCall { productDao.getAllProductss() }
     }
 
     override fun updateProduct(

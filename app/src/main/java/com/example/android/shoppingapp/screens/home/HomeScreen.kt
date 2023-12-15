@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -89,6 +90,14 @@ fun HomeScreen(
             }) {
                 Icon(
                     painter = painterResource(id = R.drawable.baseline_history_24),
+                    contentDescription = "purchase history"
+                )
+            }
+            IconButton(modifier = Modifier, onClick = {
+                navActions.navigateToSearch()
+            }) {
+                Icon(
+                    Icons.Outlined.Search,
                     contentDescription = "purchase history"
                 )
             }

@@ -13,6 +13,9 @@ interface ProductDao {
     @Query("SELECT * FROM product")
     fun getAllProducts(): Flow<List<ProductsItem>>
 
+    @Query("SELECT * FROM product")
+    fun getAllProductss(): List<ProductsItem>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertProduct(product: ProductsItem)
 

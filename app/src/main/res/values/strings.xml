@@ -2,4 +2,7 @@
     <string name="app_name">Shopping App</string>
     <string name="add_to_cart">Add to cart</string>
     <string name="added_to_cart">Added to cart</string>
+    <string name="search_result_empty_message">It seems the product you are looking for is not available.</string>
+    <string name="search_something">Search for the product you want</string>
+    <string name="unknown_error">Something went wrong</string>
 </resources>

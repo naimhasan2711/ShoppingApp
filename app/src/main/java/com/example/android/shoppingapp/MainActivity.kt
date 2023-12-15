@@ -22,6 +22,7 @@ import com.example.android.shoppingapp.screens.cart.CartScreen
 import com.example.android.shoppingapp.screens.details.DetailsScreen
 import com.example.android.shoppingapp.screens.home.HomeScreen
 import com.example.android.shoppingapp.screens.purchase_history.PurchaseHistoryScreen
+import com.example.android.shoppingapp.screens.search.SearchScreen
 import com.example.android.shoppingapp.ui.theme.ShoppingAppTheme
 import com.example.android.shoppingapp.utils.NavActions
 import com.example.android.shoppingapp.utils.NavRoutes
@@ -97,6 +98,13 @@ private fun MainScreen(
 
             composable(NavRoutes.PURCHASE_HISTORY) {
                 PurchaseHistoryScreen(
+                    navActions = navActions,
+                    coroutineScope = coroutineScope
+                )
+            }
+
+            composable(NavRoutes.SEARCH) {
+                SearchScreen(
                     navActions = navActions,
                     coroutineScope = coroutineScope
                 )

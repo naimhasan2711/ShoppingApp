@@ -2,6 +2,7 @@ package com.example.android.shoppingapp.data.repository
 
 import com.example.android.shoppingapp.data.ProductListCategory
 import com.example.android.shoppingapp.data.models.ProductsItem
+import com.example.android.shoppingapp.screens.search.Response
 import kotlinx.coroutines.CoroutineScope
 
 interface ProductsRepository {
@@ -16,7 +17,7 @@ interface ProductsRepository {
         productListCategory: ProductListCategory,
         result: (List<ProductsItem>) -> Unit
     )
-
+    suspend fun getAllProducts(): Response<List<ProductsItem>>
     /**
      * @param productId The id of the product we want to fetch from the database
      * @param coroutineScope A coroutine to launch asynchronous calls on
