@@ -5,6 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+
+//model class for single product item
 @Entity(tableName = "product")
 data class ProductsItem(
     @SerializedName("category")

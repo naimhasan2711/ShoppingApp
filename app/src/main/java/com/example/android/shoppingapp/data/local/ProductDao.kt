@@ -4,6 +4,9 @@ import androidx.room.*
 import com.example.android.shoppingapp.data.models.ProductsItem
 import kotlinx.coroutines.flow.Flow
 
+/*
+This is a database access class related with product data
+ */
 @Dao
 interface ProductDao {
 

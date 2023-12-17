@@ -50,6 +50,9 @@ class MainActivity : ComponentActivity() {
 }
 
 
+/*Below function contains the screen when open the app
+Contains navigation screens for navigate to different screen through hte app
+ */
 @Composable
 private fun MainScreen(
     activity: MainActivity,

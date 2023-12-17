@@ -15,6 +15,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
+//a repository implementation class for fetching data from local database for product related data
 class ProductsRepositoryImpl @Inject constructor(
     private val fakeStoreApi: ShoppingApi,
     private val productDao: ProductDao,

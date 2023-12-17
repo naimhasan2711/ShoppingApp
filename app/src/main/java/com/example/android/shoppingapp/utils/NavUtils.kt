@@ -3,6 +3,10 @@ package com.example.android.shoppingapp.utils
 import androidx.navigation.NavHostController
 
 
+/*
+This class is associates with navgraph
+Usually contains screens name and their route
+ */
 object NavRoutes {
     const val HOME = "Home"
     const val PRODUCT_DETAIL = "Product_Detail?productId="

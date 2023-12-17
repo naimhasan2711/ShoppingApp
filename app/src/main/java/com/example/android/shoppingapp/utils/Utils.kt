@@ -22,6 +22,7 @@ fun sendUserToSpecificWebPage(url: String, activity: Activity) {
     activity.startActivity(openBrowserIntent)
 }
 
+//This function helps to fetch product by their category
 fun List<ProductsItem>.getProductsByCategory(
     productListCategory: ProductListCategory,
     result: (List<ProductsItem>) -> Unit

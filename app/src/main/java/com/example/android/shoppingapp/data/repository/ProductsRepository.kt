@@ -5,6 +5,7 @@ import com.example.android.shoppingapp.data.models.ProductsItem
 import com.example.android.shoppingapp.screens.search.Response
 import kotlinx.coroutines.CoroutineScope
 
+//a repository interface class for fetching data from local database for product related data
 interface ProductsRepository {
 
     /**

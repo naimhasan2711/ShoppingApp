@@ -5,6 +5,12 @@ import com.example.android.shoppingapp.data.models.Rating;
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken;
 
+/*
+As we cant store custome data into our localdb, we need to convert it
+Like we have a Rating class which is not primitive, custom class
+So we need to convert that class
+This class convert Rating into Gson and vise verse
+ */
 class RatingConverter {
     @TypeConverter
     fun fromRating(rating: Rating): String {

@@ -6,6 +6,10 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.android.shoppingapp.data.models.Order
 
+
+/*
+This is a database access class related with purchase history/order data
+ */
 @Dao
 interface OrderDao {
     @Query("SELECT * FROM orders")

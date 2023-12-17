@@ -7,6 +7,10 @@ import com.example.android.shoppingapp.data.repository.OrderRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+/*
+This view model is implemented for inserting and fetching data
+for order history related data in the local database
+ */
 @HiltViewModel
 class OrderViewModel @Inject constructor(
     private val orderRepository: OrderRepository

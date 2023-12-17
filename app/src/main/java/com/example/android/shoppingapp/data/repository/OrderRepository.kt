@@ -7,6 +7,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+//a repository class for fetching data from local database for order related data
 class OrderRepository(private val dao: OrderDao) {
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main)

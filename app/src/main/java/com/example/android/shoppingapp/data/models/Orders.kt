@@ -4,6 +4,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+
+//model class for order
 @Entity(tableName = "orders")
 data class Order(
     @PrimaryKey
