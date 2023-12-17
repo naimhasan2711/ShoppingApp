@@ -71,6 +71,7 @@ fun PurchaseHistoryScreen(
             )
         }
 
+        //display order history data
         LazyColumn(
             modifier = Modifier.padding(vertical = 4.dp),
         ) {
@@ -94,6 +95,7 @@ fun PurchaseHistoryScreen(
 
 }
 
+//format data
 @SuppressLint("SimpleDateFormat")
 private fun formatTimeStamp(time: Long): String {
     val sdf = SimpleDateFormat("dd/MM/yy hh:mm:ss a")
@@ -101,6 +103,8 @@ private fun formatTimeStamp(time: Long): String {
     return sdf.format(netDate)
 }
 
+
+//display single row from order history page
 @Composable
 fun CardWithInformation(
     orderId: String,

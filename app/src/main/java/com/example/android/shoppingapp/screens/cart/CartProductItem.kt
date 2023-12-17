@@ -28,6 +28,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.android.shoppingapp.data.models.ProductsItem
 
+//display a single cart item
 @Composable
 fun CartProductItem(
     modifier: Modifier = Modifier,
@@ -44,6 +45,7 @@ fun CartProductItem(
                 .fillMaxWidth()
                 .padding(8.dp)
         ) {
+            //product image
             AsyncImage(
                 modifier = Modifier
                     .width(100.dp)
@@ -63,6 +65,7 @@ fun CartProductItem(
                     .padding(horizontal = 4.dp, vertical = 2.dp),
                 verticalArrangement = Arrangement.Center
             ) {
+                //product title
                 Text(
                     text = product.title,
                     fontSize = 18.sp,
@@ -74,6 +77,7 @@ fun CartProductItem(
                 )
                 Spacer(modifier = Modifier.height(30.dp))
 
+                //product price
                 Text(
                     text = "S ${product.price}",
                     fontSize = 14.sp,
@@ -85,6 +89,7 @@ fun CartProductItem(
                 )
             }
 
+            //add/remove from cart button
             IconButton(modifier = Modifier.weight(.15f), onClick = {
                 removeFromCart(product.copy(addedToCart = false))
             }) {

@@ -16,6 +16,7 @@ data class CartScreenState(
     var allProducts: List<ProductsItem> = emptyList(),
 )
 
+//view model for product in cart related data
 @HiltViewModel
 class CartViewModel @Inject constructor(private val repository: ProductsRepository) : ViewModel() {
 

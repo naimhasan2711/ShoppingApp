@@ -41,7 +41,9 @@ import com.example.android.shoppingapp.data.models.Order
 import com.example.android.shoppingapp.data.models.ProductsItem
 import com.example.android.shoppingapp.utils.NavActions
 import kotlinx.coroutines.CoroutineScope
-
+/*
+This class is responsible for showing cart screens
+ */
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
@@ -64,6 +66,7 @@ fun CartScreen(
             scaffoldState = rememberScaffoldState(),
             modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
             topBar = {
+                //top-bar with text and back button
                 TopAppBar(
                     title = {
                         Text(
@@ -94,6 +97,7 @@ fun CartScreen(
                     modifier = Modifier
                         .fillMaxSize(1f), horizontalAlignment = Alignment.CenterHorizontally
                 ) {
+                    //columns for list or cart product
                     LazyColumn(
                         modifier = Modifier
                             .fillMaxSize()
@@ -107,6 +111,7 @@ fun CartScreen(
                             items = addedToCartProducts,
                             key = { it.hashCode() }
                         ) { product ->
+                            //below functions is for showing single cart product
                             CartProductItem(
                                 modifier = Modifier
                                     .padding(start = 4.dp, end = 4.dp, top = 4.dp, bottom = 12.dp)
@@ -120,6 +125,7 @@ fun CartScreen(
                         }
                     }
                     Spacer(modifier = Modifier.height(24.dp))
+                    //buttons for pay products from the cart
                     Button(
                         onClick = {
                             val arrayList = ArrayList<String>()
@@ -141,8 +147,10 @@ fun CartScreen(
                                 price += item.price
                                 val time = System.currentTimeMillis()
                                 order = Order(orderId, arrayList, price, time)
+                                //after buying product, remove from teh cart
                                 cartViewModel.updateProduct(prod)
                             }
+                            //add to order history database
                             order?.let {
                                 orderViewModel.addOrder(order)
                             }
@@ -161,6 +169,7 @@ fun CartScreen(
                     }
                 }
             } else {
+                //if cart is empty, show a text
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
