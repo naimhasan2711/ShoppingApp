@@ -36,6 +36,9 @@ import coil.request.ImageRequest
 import com.example.android.shoppingapp.data.models.ProductsItem
 import java.util.Locale
 
+/*
+This composable is responsible for showing product details screen
+ */
 @Composable
 fun DetailItem(
     modifier: Modifier = Modifier,
@@ -58,6 +61,7 @@ fun DetailItem(
         elevation = 6.dp,
     ) {
         Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
+            //product image
             AsyncImage(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -68,6 +72,7 @@ fun DetailItem(
                 contentScale = ContentScale.Inside,
             )
             Spacer(modifier = Modifier.height(16.dp))
+            //product title
             Text(
                 text = product.title,
                 fontSize = 24.sp,
@@ -84,6 +89,7 @@ fun DetailItem(
                     .padding(horizontal = 16.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
+                //product category
                 Text(
                     text = product.category.toUpperCase(Locale.ROOT),
                     fontSize = 14.sp,
@@ -94,6 +100,7 @@ fun DetailItem(
                     modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
                 )
 
+                //product rating and rating counts
                 Text(
                     text = "${product.rating.rate} ⭐ (${product.rating.count})",
                     fontSize = 14.sp,
@@ -105,6 +112,7 @@ fun DetailItem(
                 )
             }
 
+            //product descriptions
             Text(
                 text = product.description,
                 fontSize = 14.sp,
@@ -115,6 +123,7 @@ fun DetailItem(
                 modifier = Modifier
                     .padding(start = 8.dp, end = 8.dp, top = 8.dp, bottom = 8.dp)
             ) {
+                //add/remove to cart button
                 OutlinedButton(
                     onClick = {
                         onAddToCart(!product.addedToCart)

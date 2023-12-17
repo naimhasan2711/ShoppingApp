@@ -13,6 +13,7 @@ import javax.inject.Inject
 
 data class DetailScreenState(var product: ProductsItem? = null)
 
+//this view-model is responsible for product details data
 @HiltViewModel
 class DetailViewModel @Inject constructor(private val repository: ProductsRepository) :
     ViewModel() {

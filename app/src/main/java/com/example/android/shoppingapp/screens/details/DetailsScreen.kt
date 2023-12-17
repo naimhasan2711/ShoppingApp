@@ -28,6 +28,10 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.android.shoppingapp.utils.NavActions
 
+/*
+This screen is responsible for showing products details screen
+this page contains a top-bar, product image and other details informations
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailsScreen(
@@ -40,6 +44,7 @@ fun DetailsScreen(
         scaffoldState = rememberScaffoldState(),
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
+            //top-bar with a back button
             TopAppBar(
                 title = {
                     Text(
@@ -76,6 +81,7 @@ fun DetailsScreen(
                 detailViewModel.getProductById(productId)
             }
             detailViewModel.detailScreenState.value.product?.let { product ->
+                //composable for products details screen
                 DetailItem(modifier = Modifier
                     .padding(start = 4.dp, end = 4.dp, top = 4.dp, bottom = 12.dp)
                     .fillMaxHeight(),
