@@ -51,7 +51,7 @@ fun SearchScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Gray)
+            .background(MaterialTheme.colorScheme.background)
     ){
         Row(
             modifier = Modifier

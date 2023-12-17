@@ -61,7 +61,7 @@ fun PurchaseHistoryScreen(
                 Icon(Icons.Filled.ArrowBack, "cart icon")
             }
             Text(
-                text = "Products",
+                text = "Purchase History",
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Medium,
                 color = androidx.compose.material3.MaterialTheme.colorScheme.onPrimary,
