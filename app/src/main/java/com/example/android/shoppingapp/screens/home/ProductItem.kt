@@ -24,12 +24,16 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.android.shoppingapp.data.models.ProductsItem
 
+/*
+This composable function is responsible for showing single product
+ */
 @Composable
 fun ProductItem(
     modifier: Modifier = Modifier,
     product: ProductsItem,
     onProductClick: () -> Unit
 ) {
+    //contains card
     Card(
         modifier = Modifier
             .padding(vertical = 4.dp, horizontal = 4.dp)
@@ -43,7 +47,7 @@ fun ProductItem(
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            // Image
+            // product Image
             AsyncImage(
                 modifier = Modifier
                     .width(100.dp)
@@ -61,6 +65,7 @@ fun ProductItem(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.Center
             ) {
+                //product title
                 Text(
                     text = product.title,
                     fontSize = 16.sp,
@@ -73,6 +78,7 @@ fun ProductItem(
 
                 Spacer(modifier = Modifier.height(30.dp))
 
+                //product price
                 Text(
                     text = "${product.price} $",
                     fontSize = 14.sp,

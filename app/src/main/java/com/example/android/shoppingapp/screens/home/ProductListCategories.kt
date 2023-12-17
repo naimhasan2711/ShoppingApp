@@ -12,6 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.android.shoppingapp.data.ProductListCategory
 
+/*
+This composable is responsible for showing product category list filter
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductListCategories(
@@ -29,6 +32,7 @@ fun ProductListCategories(
     ) {
         for (category in categoriesMap) {
             Spacer(modifier = Modifier.width(4.dp))
+            //filterable chip
             FilterChip(
                 selected = homeScreenState.productListCategory == category.key,
                 onClick = { onClick(category.key) },

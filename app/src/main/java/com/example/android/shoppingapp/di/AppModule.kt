@@ -21,6 +21,11 @@ import retrofit2.create
 import javax.inject.Singleton
 
 
+/*
+This is a Module class for dependency injection
+functions under this class will be automatically provided
+when they are needed, dependending on their return type
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {

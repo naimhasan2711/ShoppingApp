@@ -39,6 +39,10 @@ import com.example.android.shoppingapp.utils.NavActions
 import kotlinx.coroutines.CoroutineScope
 
 
+/*
+This class is responsible for displaying home screen like toolbar
+category filter and list of product
+ */
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(
@@ -58,11 +62,15 @@ fun HomeScreen(
             ProductListCategory.WomenClothing to "Women Clothing"
         )
     }
+    /*
+    Column containing whole screen
+     */
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Gray)
     ) {
+        //this row contains toolbar
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -102,6 +110,7 @@ fun HomeScreen(
                 )
             }
         }
+        //display either progressbar or category list
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
@@ -129,10 +138,12 @@ fun HomeScreen(
                         })
                 }
             }
+            //this bloc display list of product
             items(
                 items = homeScreenState.products,
                 key = { it.hashCode() }
             ) { product ->
+                //composable function for each product
                 ProductItem(
                     modifier = Modifier
                         .padding(start = 4.dp, end = 4.dp, top = 4.dp, bottom = 12.dp)

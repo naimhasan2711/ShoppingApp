@@ -17,6 +17,12 @@ data class HomeScreenState(
     var productListCategory: ProductListCategory = ProductListCategory.AllCategories
 )
 
+/*
+This viewmodel is responsible for fetching data from data source
+like remote or local about product related data
+like showing all product list,
+product list category
+ */
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val repository: ProductsRepository) : ViewModel() {
 
