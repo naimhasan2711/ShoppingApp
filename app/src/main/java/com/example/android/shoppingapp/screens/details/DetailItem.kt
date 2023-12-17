@@ -14,14 +14,18 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -29,7 +33,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.example.android.shoppingapp.R
 import com.example.android.shoppingapp.data.models.ProductsItem
 import java.util.Locale
 
@@ -39,6 +42,17 @@ fun DetailItem(
     product: ProductsItem,
     onAddToCart: (Boolean) -> Unit,
 ) {
+    var isAddedToCart by remember { mutableStateOf(product.addedToCart) }
+    val buttonText = if (isAddedToCart) {
+        "Added to Cart"
+    } else {
+        "Add to cart"
+    }
+    val  buttonIcon = if(isAddedToCart){
+        Icons.Default.Done
+    }else{
+        Icons.Outlined.ShoppingCart
+    }
     Card(
         modifier = modifier,
         elevation = 6.dp,
@@ -102,25 +116,22 @@ fun DetailItem(
                     .padding(start = 8.dp, end = 8.dp, top = 8.dp, bottom = 8.dp)
             ) {
                 OutlinedButton(
-                    onClick = { onAddToCart(!product.addedToCart) },
+                    onClick = {
+                        onAddToCart(!product.addedToCart)
+                        isAddedToCart = !isAddedToCart
+                    },
                     modifier = Modifier
                         .padding(end = 8.dp)
                         .weight(1f),
                     shape = RoundedCornerShape(10)
                 ) {
-                    if (product.addedToCart) {
                         Icon(
-                            imageVector = Icons.Default.Done,
+                            imageVector = buttonIcon,
                             contentDescription = "Checked icon",
                             tint = MaterialTheme.colorScheme.primary
                         )
-                    }
                     Text(
-                        text =
-                        if (product.addedToCart) stringResource(id = R.string.added_to_cart)
-                        else stringResource(
-                            id = R.string.add_to_cart
-                        ),
+                        text = buttonText,
                         color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Medium
                     )
